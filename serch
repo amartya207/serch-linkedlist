@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int val;
+    struct node *next;
+};
+
+struct node *is_present(struct node *head, int val) {
+    while(head!= NULL) {
+	  if(head->val == val) return 1;
+	  head = head->next;
+	}
+	
+	return 0;
+}
+
+void print_list(struct node *head)
+{
+    printf("H->");
+
+    while(head)
+    {
+        printf("%d->", head->val);
+        head = head->next;
+    }
+
+    printf("|||\n\n");
+}
+
+void insert_front(struct node **head, int value)
+{
+    struct node * new_node = NULL;
+
+    new_node = (struct node *)malloc(sizeof(struct node));
+
+    if (new_node == NULL)
+    {
+        printf("Failed to insert element. Out of memory");
+    }
+
+    new_node->val = value;
+    new_node->next = *head;
+
+    *head = new_node;
+}
+
+int main()
+{
+    struct node * head = NULL;
+    
+    /*Creating the linked list*/
+    insert_front(&head, 16);
+    insert_front(&head, 83);
+    insert_front(&head, 89);
+    insert_front(&head, 12);
+    insert_front(&head, 67);
+    insert_front(&head, 20);
+    insert_front(&head, 2);
+    
+    
+    printf("Linked List: ");
+    print_list(head);
+    
+    printf("Finding 99 in the Linked List.\n");
+    
+    if(is_present(head, 99)) {
+		printf("99 is present in the Linked List...\n");
+	} else {
+		printf("99 is not present in the Linked List.\n");
+	}
+	
+	printf("\nFinding 12 in the Linked List...\n");
+    
+    if(is_present(head, 12)) {
+		printf("12 is present in the Linked List.\n");
+	} else {
+		printf("12 is not present in the Linked List.\n");
+	}
+    
+    return 0;
+}
